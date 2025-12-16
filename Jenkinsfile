@@ -2,41 +2,40 @@ pipeline {
     agent any
 
     environment {
-        // Asegúrate de configurar estas credenciales en Jenkins (Manage Jenkins -> Credentials)
-        // O defínelas aquí si son seguras (no recomendado para claves reales)
+        ALLURE_RESULTS = "${env.WORKSPACE}\\allure-results"
+        ALLURE_REPORT = "${env.WORKSPACE}\\allure-report"
+
         BROWSERSTACK_USERNAME = credentials('browserstack-username')
         BROWSERSTACK_ACCESS_KEY = credentials('browserstack-access-key')
-        BROWSERSTACK_APP_ID = 'bs://tu_app_id_generado' 
+        
+        APP_PATH='bs://8f52793e8966289eec6b56d5adcfa813536fb318'
     }
 
     stages {
+
         stage('Clean') {
             steps {
                 echo 'Limpiando workspace'
                 deleteDir()
             }
         }
-
+        
         stage('Checkout') {
             steps {
-                // Reemplaza con tu URL de GitHub
-                git branch: 'main', url: 'https://github.com/TU_USUARIO/TU_REPO.git'
+                git branch: 'main', url: 'https://github.com/evertms/BrowserstackJenkins.git'
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Build') {
             steps {
-                // Instala las dependencias del proyecto
-                // Se usa 'npm ci' para instalaciones limpias en CI
-                bat 'npm ci'
+                bat 'npm install'
             }
         }
 
-        stage('Test on BrowserStack') {
+        stage('Test') {
             steps {
-                // Ejecuta las pruebas usando la configuración de BrowserStack
-                bat 'npx wdio run ./wdio.browserstack.conf.js'
-            }
+                bat 'npx wdio wdio.browserstack.conf.js'
+            } 
         }
 
         stage('Report') {
@@ -45,14 +44,21 @@ pipeline {
                 bat "npx allure generate %ALLURE_RESULTS% -c -o %ALLURE_REPORT%"
             }
         }
+
+        stage('Publish report') {
+            steps {
+                echo "Publicando reporte"
+                allure includeProperties: 
+                    false,
+                    jdk: '',
+                    results: [[path: 'allure-results']] 
+            }
+        }
     }
 
     post {
         always {
-            // Genera y archiva el reporte de Allure
-            script {
-                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-            }
+            echo "Pipeline finalizada"
         }
     }
 }

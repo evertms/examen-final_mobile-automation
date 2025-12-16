@@ -58,7 +58,7 @@ export const config = {
     //
     capabilities: [{
         'bstack:options': {
-            deviceName: 'Prueba',
+            deviceName: 'Google Pixel 9',
             platformVersion: '16.0',
             platformName: 'android',
             appiumVersion: '2.15.0',
@@ -125,8 +125,8 @@ export const config = {
         browserstacklocal: true,
         accessibility: false,
         testObservabilityOptions: {
-            buildName: 'Test clock',
-            projectName: 'Clock',
+            buildName: 'Examen final',
+            projectName: 'Swag labs',
             buildTag: 'Tag Test'
         }
     }]],
