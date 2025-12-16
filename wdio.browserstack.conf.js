@@ -126,7 +126,7 @@ export const config = {
         accessibility: false,
         testObservabilityOptions: {
             buildName: 'Examen final',
-            projectName: 'Swag labs',
+            projectName: 'Todo App',
             buildTag: 'Tag Test'
         }
     }]],

@@ -8,7 +8,7 @@ pipeline {
         BROWSERSTACK_USERNAME = credentials('browserstack-username')
         BROWSERSTACK_ACCESS_KEY = credentials('browserstack-access-key')
         
-        APP_PATH='bs://8f52793e8966289eec6b56d5adcfa813536fb318'
+        APP_PATH='bs://1173e880b62866477b1df5d173b0ee20e154f5b6'
     }
 
     stages {

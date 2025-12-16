@@ -55,9 +55,7 @@ export const config = {
         "appium:platformVersion": "16.0",
         "appium:deviceName": "Prueba",
         "appium:automationName": "UiAutomator2",
-        "appium:app": "C:\\Users\\evert\\Downloads\\SauceLabs.apk",
-        "appium:appPackage": "com.swaglabsmobileapp",
-        "appium:appActivity": "com.swaglabsmobileapp.MainActivity"
+        "appium:app": "C:\\Users\\evert\\Downloads\\Todo.apk",
     }],
 
     //
