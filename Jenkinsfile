@@ -22,7 +22,7 @@ pipeline {
         
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/evertms/BrowserstackJenkins.git'
+                git branch: 'main', url: 'https://github.com/evertms/examen-final_mobile-automation.git'
             }
         }
 
